@@ -1,11 +1,10 @@
-title: Anshaj Khare 
+title: Anshaj Khare
 logo: "/images/logo1.png?raw=true"
-description: > # your text below (remove <br> elements if you don't need line breaks)
+description:
+  > # your text below (remove <br> elements if you don't need line breaks)
   Experienced data science professional with a demonstrated history of making a postive difference with data.
     <br><br>
-  <a href="https://blog.anshaj.dev/">Personal blog</a> <br>
-  <a href="https://linkedin.com/in/anshaj-khare-62158688/">Connect with me on LinkedIn</a><br>
-  
-  
-  
+  <a href="https://compute.anshaj.dev/">My tech blog</a> <br>
+  <a href="https://www.linkedin.com/in/anshaj-khare/">Connect with me on LinkedIn</a><br>
+
 theme: jekyll-theme-minimal

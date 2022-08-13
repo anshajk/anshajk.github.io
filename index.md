@@ -1,12 +1,23 @@
 ## Work Experience 
 
+### Data and Applied Scientist II - Microsoft
+Feb 2022 - Current
+- I work in the cloud supply chain sustainability team as a data and applied scientist
+- I design patterns for data flow between systems for reliable cloud supply chain data
+
 ### Data Scientist - Tech9
-Dec 2019 - Current
-- Trained supervised models for financial applications to automate manual classification processes
-- Developed end to end machine learning services for client applications on AWS
-- Developed classification models for website classification systems 
-- Developed data pipelines on Airflow to orchestrated data infrasture
-- Designed databases for client services and reporting systems using python based ORMs.
+Dec 2019 - Feb 2022
+
+_Engineering_ 
+- Developed a serverless GraphQL Backend on Google Cloud
+- Developed ETL pipelines on apache airflow (Cloud Composer with GKE)
+- Designed the database schema for the application from ground up. 
+- Developed CI/CD pipelines for faster and reliable code delivery
+- Developed loosely coupled, event-based, cloud native micro-services 
+
+_Machine learning_
+- Developed a classification model to categorise financial transaction and predict transaction categories
+- Developed a classification model to find website that solely exist to boost the ranking of target websites in search engines
  
 ### Programmer Analyst - Octathorpe
 Dec 2017 - Nov 2019
