@@ -3,10 +3,12 @@
 ### Data and Applied Scientist II - Microsoft
 
 Feb 2022 - Current
+
 I am currently working in the cloud supply chain team as a machine learning engineer with focus on building large-scale data processing systems.
 
 ### Technical Instructor - Interview Kickstart
 Nov 2023 - Current
+
 I am currently working as a technical instructor at [Interview Kickstart](https://in.interviewkickstart.com/). I teach industry professionals topics including
 
 * Python
