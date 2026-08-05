@@ -1,0 +1,189 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const featured = projects.filter((p) => p.data.featured);
+const rest = projects.filter((p) => !p.data.featured);
+---
+
+<section class="section" id="work">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Selected work"
+      title="Things I've built"
+      lede="Side projects and open source where I get to make the architectural calls end to end."
+    />
+
+    <ul class="work__featured">
+      {
+        featured.map((project) => (
+          <li class="card work__card work__card--featured">
+            <div class="work__meta">
+              <span class="badge">{project.data.kind}</span>
+              {project.data.status && (
+                <span class="work__status">{project.data.status}</span>
+              )}
+            </div>
+            <h3 class="serif work__name">{project.data.name}</h3>
+            <p class="work__description">{project.data.description}</p>
+            <ul class="badge-row work__stack">
+              {project.data.stack.map((tech) => (
+                <li class="badge">{tech}</li>
+              ))}
+            </ul>
+            <div class="work__links">
+              {project.data.links.map((linkItem) => (
+                <a class="work__link" href={linkItem.href} rel="noopener">
+                  {linkItem.label}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="work__grid">
+      {
+        rest.map((project) => (
+          <li class="card card--nested work__card">
+            <span class="badge">{project.data.kind}</span>
+            <h3 class="serif work__name work__name--sm">{project.data.name}</h3>
+            <p class="work__description">{project.data.description}</p>
+            <ul class="badge-row work__stack">
+              {project.data.stack.map((tech) => (
+                <li class="badge">{tech}</li>
+              ))}
+            </ul>
+            <div class="work__links">
+              {project.data.links.map((linkItem) => (
+                <a class="work__link" href={linkItem.href} rel="noopener">
+                  {linkItem.label}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .work__featured,
+  .work__grid {
+    display: grid;
+    gap: var(--spacing-24);
+    list-style: none;
+  }
+
+  .work__grid {
+    margin-top: var(--spacing-24);
+  }
+
+  @media (min-width: 48rem) {
+    .work__featured {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .work__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .work__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .work__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-16);
+    transition: box-shadow var(--transition), border-color var(--transition);
+  }
+
+  .work__card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .work__card--featured:hover {
+    border-color: var(--color-mist);
+  }
+
+  .work__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+  }
+
+  .work__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--text-small);
+    color: var(--color-ashen);
+  }
+
+  .work__status::before {
+    content: '';
+    inline-size: 5px;
+    block-size: 5px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-clay);
+  }
+
+  .work__name {
+    font-size: var(--text-heading-sm);
+    line-height: var(--leading-heading-sm);
+    color: var(--color-carbon-ink);
+  }
+
+  .work__name--sm {
+    font-size: 1.25rem;
+  }
+
+  .work__description {
+    font-size: var(--text-body);
+    color: var(--color-graphite);
+    line-height: 1.65;
+  }
+
+  .work__stack {
+    margin-top: auto;
+  }
+
+  .work__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-16);
+  }
+
+  .work__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-carbon-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-mist);
+    padding-bottom: 1px;
+  }
+
+  .work__link:hover {
+    border-bottom-color: var(--color-carbon-ink);
+  }
+
+  .work__link span {
+    font-size: 0.75em;
+  }
+</style>

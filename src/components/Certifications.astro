@@ -1,0 +1,146 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  /** Show every certification, or just the headline ones with a link out. */
+  full?: boolean;
+}
+
+const { full = false } = Astro.props;
+
+const all = (await getCollection('certifications')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const items = full ? all : all.slice(0, 3);
+---
+
+<section class="section" id="certifications">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Certifications"
+      title={full ? 'Every certification' : 'Verified credentials'}
+      lede={
+        full
+          ? 'Credentials from AWS, Google Cloud and IBM, with verification links where they exist.'
+          : 'A sample of formal training in cloud, data engineering and machine learning.'
+      }
+    />
+
+    <ul class="certs">
+      {
+        items.map((cert) => (
+          <li class="card certs__item">
+            <div class="certs__head">
+              <h3 class="certs__name">{cert.data.name}</h3>
+              <p class="certs__issuer">{cert.data.issuer}</p>
+            </div>
+
+            {cert.data.detail && <p class="certs__detail">{cert.data.detail}</p>}
+
+            {cert.data.courses.length > 0 && (
+              <ul class="certs__courses">
+                {cert.data.courses.map((course) => (
+                  <li>{course}</li>
+                ))}
+              </ul>
+            )}
+
+            {cert.data.href && (
+              <a class="certs__link" href={cert.data.href} rel="noopener">
+                Verify
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      !full && (
+        <a class="button button--ghost certs__more" href="/certifications/">
+          All certifications
+        </a>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .certs {
+    display: grid;
+    gap: var(--spacing-24);
+    list-style: none;
+  }
+
+  @media (min-width: 48rem) {
+    .certs {
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    }
+  }
+
+  .certs__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-8);
+  }
+
+  .certs__head {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .certs__name {
+    font-size: var(--text-body-lg);
+    font-weight: var(--weight-550);
+    line-height: 1.35;
+    color: var(--color-carbon-ink);
+  }
+
+  .certs__issuer {
+    font-size: var(--text-body);
+    color: var(--color-ashen);
+  }
+
+  .certs__detail {
+    font-size: var(--text-body);
+    color: var(--color-graphite);
+  }
+
+  .certs__courses {
+    display: grid;
+    gap: 0.375rem;
+    margin-top: var(--spacing-8);
+    padding-left: 1.1rem;
+    font-size: var(--text-body);
+    color: var(--color-graphite);
+  }
+
+  .certs__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin-top: auto;
+    padding-top: var(--spacing-16);
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-carbon-ink);
+    text-decoration: none;
+  }
+
+  .certs__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .certs__link span {
+    font-size: 0.75em;
+  }
+
+  .certs__more {
+    margin-top: var(--spacing-32);
+  }
+</style>

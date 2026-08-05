@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const roles = (await getCollection('experience')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class="section section--nested" id="experience">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Experience"
+      title="Where I've done the work"
+      lede="Eight years across machine learning engineering, data platforms and cloud infrastructure."
+    />
+
+    <ol class="timeline">
+      {
+        roles.map((role) => (
+          <li class="timeline__item">
+            <div class="timeline__aside">
+              <p class="timeline__period">{role.data.period}</p>
+              <p class="timeline__location">{role.data.location}</p>
+              {role.data.current && (
+                <p class="timeline__current">Current role</p>
+              )}
+            </div>
+
+            <div class="card timeline__card">
+              <h3 class="serif timeline__role">{role.data.role}</h3>
+              <p class="timeline__company">
+                {role.data.companyUrl ? (
+                  <a href={role.data.companyUrl} rel="noopener">
+                    {role.data.company}
+                  </a>
+                ) : (
+                  role.data.company
+                )}
+              </p>
+              <p class="timeline__summary">{role.data.summary}</p>
+
+              <ul class="timeline__highlights">
+                {role.data.highlights.map((highlight) => (
+                  <li class="timeline__highlight">
+                    <p class="timeline__highlight-title">{highlight.title}</p>
+                    <p class="timeline__highlight-detail">{highlight.detail}</p>
+                  </li>
+                ))}
+              </ul>
+
+              {role.data.stack.length > 0 && (
+                <ul class="badge-row timeline__stack">
+                  {role.data.stack.map((tech) => (
+                    <li class="badge">{tech}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    display: grid;
+    gap: var(--spacing-32);
+    list-style: none;
+  }
+
+  .timeline__item {
+    display: grid;
+    gap: var(--spacing-16);
+  }
+
+  @media (min-width: 56rem) {
+    .timeline__item {
+      grid-template-columns: 13rem minmax(0, 1fr);
+      gap: var(--spacing-32);
+    }
+
+    .timeline__aside {
+      position: sticky;
+      top: 6rem;
+      align-self: start;
+      padding-top: var(--spacing-8);
+    }
+  }
+
+  .timeline__period {
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-carbon-ink);
+  }
+
+  .timeline__location {
+    font-size: var(--text-body);
+    color: var(--color-ashen);
+  }
+
+  .timeline__current {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: var(--spacing-8);
+    font-size: var(--text-small);
+    color: var(--color-ashen);
+  }
+
+  .timeline__current::before {
+    content: '';
+    inline-size: 5px;
+    block-size: 5px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-clay);
+  }
+
+  .timeline__card {
+    display: grid;
+    gap: var(--spacing-8);
+  }
+
+  .timeline__role {
+    font-size: var(--text-heading-sm);
+    line-height: var(--leading-heading-sm);
+    color: var(--color-carbon-ink);
+  }
+
+  .timeline__company {
+    font-size: var(--text-body-lg);
+    font-weight: var(--weight-medium);
+    color: var(--color-graphite);
+  }
+
+  .timeline__summary {
+    max-width: var(--measure);
+    margin-top: var(--spacing-8);
+    font-size: var(--text-body);
+    color: var(--color-ashen);
+  }
+
+  .timeline__highlights {
+    display: grid;
+    gap: var(--spacing-16);
+    margin-top: var(--spacing-16);
+    padding-top: var(--spacing-24);
+    border-top: 1px solid var(--color-chalk);
+    list-style: none;
+  }
+
+  .timeline__highlight-title {
+    font-size: var(--text-body);
+    font-weight: var(--weight-550);
+    color: var(--color-carbon-ink);
+  }
+
+  .timeline__highlight-detail {
+    max-width: var(--measure);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    color: var(--color-graphite);
+  }
+
+  .timeline__stack {
+    margin-top: var(--spacing-16);
+  }
+</style>

@@ -1,0 +1,19 @@
+- id: latency
+  order: 1
+  value: 16h → 1h
+  label: Recommendation latency after replatforming the circular cloud engine
+
+- id: hours-saved
+  order: 2
+  value: 400 hrs
+  label: Saved per developer per year by the data orchestration framework
+
+- id: engineers
+  order: 3
+  value: 100+
+  label: Microsoft engineers mentored on building scalable AI agents
+
+- id: professionals
+  order: 4
+  value: 4,000+
+  label: Professionals upskilled through teaching and guest lectures

@@ -1,0 +1,115 @@
+- id: compute-blog
+  order: 1
+  featured: true
+  name: The Compute Blog
+  kind: Writing
+  status: Active
+  description: >-
+    A technical blog where I run experiments and write about how modern AI
+    systems actually work — agent tooling, the Model Context Protocol, retrieval,
+    and the engineering underneath them. Written for engineers who want the
+    mechanism, not the marketing.
+  stack:
+    - Agentic AI
+    - MCP
+    - Systems writing
+  links:
+    - label: Read the blog
+      href: https://compute.anshaj.dev
+
+- id: streaks
+  order: 2
+  featured: true
+  name: Streaks
+  kind: Web app
+  status: Live
+  description: >-
+    A habit and learning tracker that makes deliberate practice stick. It pairs
+    don't-break-the-chain streaks and daily goals with an SM-2 spaced-repetition
+    scheduler, so solved problems and read topics resurface exactly when you are
+    about to forget them. XP, levels, achievements and a year-long activity
+    heatmap keep the loop going.
+  stack:
+    - Next.js 16
+    - TypeScript
+    - PostgreSQL
+    - Prisma 7
+    - Auth.js v5
+    - Tailwind CSS v4
+    - Zod
+    - Vitest
+  links:
+    - label: Visit Streaks
+      href: https://streaks.anshaj.dev
+
+- id: mcp-boilerplate
+  order: 3
+  name: MCP Boilerplate
+  kind: Open source
+  description: >-
+    A reference implementation for the Model Context Protocol — a working
+    starting point for wiring tools and resources into an MCP server.
+  stack:
+    - Python
+    - MCP
+  links:
+    - label: View on GitHub
+      href: https://github.com/anshajk/mcp_boilerplate
+
+- id: a2a-boilerplate
+  order: 4
+  name: A2A Boilerplate
+  kind: Open source
+  description: >-
+    A demonstration of the Agent-to-Agent protocol, showing how independent
+    agents discover each other and collaborate on a task.
+  stack:
+    - Python
+    - A2A protocol
+  links:
+    - label: View on GitHub
+      href: https://github.com/anshajk/a2a_boilerplate
+
+- id: ragapp
+  order: 5
+  name: RAG App
+  kind: Open source
+  description: >-
+    A template for building a scalable retrieval-augmented generation system,
+    structured for production rather than for a demo notebook.
+  stack:
+    - Python
+    - RAG
+    - Vector search
+  links:
+    - label: View on GitHub
+      href: https://github.com/anshajk/ragApp
+
+- id: python-frameworks
+  order: 6
+  name: Python Frameworks
+  kind: Open source
+  description: >-
+    A curated tour of powerful Python frameworks across web, data and ML, each
+    with a runnable example — a map of the ecosystem for engineers deciding what
+    to reach for.
+  stack:
+    - Python
+  links:
+    - label: View on GitHub
+      href: https://github.com/anshajk/python-frameworks
+
+- id: omdena
+  order: 7
+  name: Omdena — Student Debt
+  kind: Collaboration
+  description: >-
+    Worked as a machine learning engineer on Omdena's open collaborative
+    platform, on a project studying the social and financial implications of
+    student debt in the United States.
+  stack:
+    - Python
+    - Machine learning
+  links:
+    - label: About Omdena
+      href: https://www.omdena.com/

@@ -1,0 +1,82 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/source-serif-4';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Page-specific <title>; the site name is appended automatically. */
+  pageTitle?: string;
+}
+
+const { title, description = site.description, pageTitle } = Astro.props;
+
+const documentTitle = pageTitle
+  ? `${pageTitle} · ${site.name}`
+  : (title ?? `${site.name} — ${site.role}`);
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: site.role,
+  worksFor: { '@type': 'Organization', name: site.company },
+  description: site.description,
+  sameAs: [
+    'https://github.com/anshajk',
+    'https://www.linkedin.com/in/anshaj-khare/',
+    'https://compute.anshaj.dev',
+  ],
+  knowsAbout: [
+    'Agentic AI',
+    'Machine learning engineering',
+    'Data platforms',
+    'Apache Spark',
+    'Kafka',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <meta name="theme-color" content="#f8f8f6" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={documentTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

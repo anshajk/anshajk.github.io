@@ -1,0 +1,111 @@
+---
+import { site, socials } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__lede">
+      <p class="serif site-footer__title">Let's build something.</p>
+      <p class="site-footer__text">
+        My inbox is open for interesting problems — agentic systems, data
+        platforms, or teaching engineers to build both.
+      </p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Elsewhere">
+      <h2 class="site-footer__heading">Elsewhere</h2>
+      <ul class="site-footer__list">
+        {
+          socials.map((item) => (
+            <li>
+              <a class="site-footer__link" href={item.href} rel="me noopener">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <p class="site-footer__copyright">
+      © {year} {site.name}. Built with Astro and hosted on GitHub Pages.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--surface-dark);
+    color: var(--color-pebble);
+    padding-block: var(--spacing-64) var(--spacing-32);
+    margin-top: var(--spacing-96);
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: var(--spacing-40);
+    padding-bottom: var(--spacing-40);
+    border-bottom: 1px solid #1f1f1f;
+  }
+
+  @media (min-width: 48rem) {
+    .site-footer__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--spacing-64);
+    }
+  }
+
+  .site-footer__title {
+    font-size: var(--text-heading-sm);
+    line-height: var(--leading-heading-sm);
+    color: var(--color-bone-parchment);
+  }
+
+  .site-footer__text {
+    margin-top: var(--spacing-8);
+    max-width: 44ch;
+    font-size: var(--text-body);
+    color: var(--color-pebble);
+  }
+
+  .site-footer__heading {
+    font-size: var(--text-caption);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #6b6963;
+  }
+
+  .site-footer__list {
+    display: grid;
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-16);
+    list-style: none;
+  }
+
+  .site-footer__link {
+    font-size: var(--text-body);
+    color: var(--color-pebble);
+    text-decoration: none;
+  }
+
+  .site-footer__link:hover {
+    color: var(--color-bone-parchment);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .site-footer__copyright {
+    margin-top: var(--spacing-24);
+    font-size: var(--text-small);
+    color: #6b6963;
+  }
+
+  .site-footer :global(:focus-visible) {
+    outline-color: var(--color-bone-parchment);
+  }
+</style>

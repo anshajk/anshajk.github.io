@@ -1,0 +1,43 @@
+- id: interview-kickstart
+  order: 1
+  title: Technical Instructor
+  org: Interview Kickstart
+  orgUrl: https://interviewkickstart.com
+  period: Nov 2023 — Present
+  description: >-
+    I teach working engineers preparing for senior roles at top technology
+    companies, covering the full path from Python fundamentals through applied
+    machine learning.
+  topics:
+    - Python
+    - Machine learning
+    - Deep learning
+    - Data analytics
+
+- id: guest-lecturing
+  order: 2
+  title: Guest Lecturer & Mentor
+  org: Industry programs
+  description: >-
+    I run technical programs for audiences ranging from individual software
+    engineers to executive leadership across multiple organizations, translating
+    fast-moving AI research into decisions teams can act on.
+  topics:
+    - Agentic AI
+    - Generative AI
+    - Machine learning
+    - Software engineering
+
+- id: internal-enablement
+  order: 3
+  title: AI Enablement
+  org: Microsoft
+  orgUrl: https://www.microsoft.com/
+  description: >-
+    Inside Microsoft I designed and delivered the technical programs that took
+    100+ engineers from curiosity to shipping agentic systems, building the
+    organizational readiness for AI-native product development.
+  topics:
+    - Agent frameworks
+    - Evaluation
+    - Production AI

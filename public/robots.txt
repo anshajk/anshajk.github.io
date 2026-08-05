@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anshaj.dev/sitemap-index.xml

@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const entries = (await getCollection('teaching')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class="section" id="teaching">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Teaching & speaking"
+      title="Explaining is part of the job"
+      lede="I've taught roughly 4,000 engineers and leaders — the fastest way I know to find the holes in your own understanding."
+    />
+
+    <ul class="teaching__grid">
+      {
+        entries.map((entry) => (
+          <li class="card teaching__card">
+            <h3 class="serif teaching__title">{entry.data.title}</h3>
+            <p class="teaching__org">
+              {entry.data.orgUrl ? (
+                <a href={entry.data.orgUrl} rel="noopener">
+                  {entry.data.org}
+                </a>
+              ) : (
+                entry.data.org
+              )}
+              {entry.data.period && (
+                <span class="teaching__period"> · {entry.data.period}</span>
+              )}
+            </p>
+            <p class="teaching__description">{entry.data.description}</p>
+            <ul class="badge-row teaching__topics">
+              {entry.data.topics.map((topic) => (
+                <li class="badge">{topic}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .teaching__grid {
+    display: grid;
+    gap: var(--spacing-24);
+    list-style: none;
+  }
+
+  @media (min-width: 56rem) {
+    .teaching__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .teaching__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .teaching__title {
+    font-size: 1.25rem;
+    line-height: var(--leading-heading-sm);
+    color: var(--color-carbon-ink);
+  }
+
+  .teaching__org {
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-graphite);
+  }
+
+  .teaching__period {
+    font-weight: var(--weight-regular);
+    color: var(--color-ashen);
+  }
+
+  .teaching__description {
+    margin-top: var(--spacing-8);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    color: var(--color-graphite);
+  }
+
+  .teaching__topics {
+    margin-top: auto;
+    padding-top: var(--spacing-16);
+  }
+</style>

@@ -1,0 +1,37 @@
+- id: aws-developer-associate
+  order: 1
+  name: AWS Certified Developer — Associate
+  issuer: Amazon Web Services
+  detail: >-
+    Developing, deploying and debugging cloud-based applications on AWS.
+
+- id: gcp-data-engineering
+  order: 2
+  name: Data Engineering, Big Data and Machine Learning on GCP
+  issuer: Google Cloud · Coursera
+  detail: Five-course specialization.
+  href: https://www.coursera.org/account/accomplishments/specialization/certificate/TT5RGYBZUGU2
+
+- id: ibm-advanced-data-science
+  order: 3
+  name: Advanced Data Science with IBM
+  issuer: IBM · Coursera
+  detail: Four-course specialization.
+  href: https://coursera.org/share/df6e3030dde2e5349de59125d3b12ac6
+
+- id: ibm-capstone
+  order: 4
+  name: Applied Data Science Capstone
+  issuer: IBM
+  href: https://www.credly.com/badges/25608eae-5bef-4381-84b1-d5c101d129c0/public_url
+
+- id: advanced-ml-tensorflow-gcp
+  order: 5
+  name: Advanced Machine Learning with TensorFlow on Google Cloud
+  issuer: Google Cloud · Coursera
+  courses:
+    - End-to-End Machine Learning with TensorFlow on GCP
+    - Production Machine Learning Systems
+    - Image Understanding with TensorFlow on GCP
+    - Sequence Models for Time Series and Natural Language Processing
+    - Recommendation Systems with TensorFlow on GCP

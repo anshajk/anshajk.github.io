@@ -1,0 +1,114 @@
+- id: microsoft
+  order: 1
+  role: Machine Learning Engineer II
+  company: Microsoft
+  companyUrl: https://www.microsoft.com/
+  location: Bengaluru, India
+  period: Feb 2022 — Present
+  current: true
+  summary: >-
+    Building agentic AI systems and the modern data platform behind Microsoft
+    Cloud Supply Chain's circular cloud operations.
+  highlights:
+    - title: Agentic AI systems
+      detail: >-
+        Designed, built and deployed multiple production agentic systems — both
+        user-facing and service-to-service. Received the org-level CSCP Stellar
+        Quest award for driving this end to end.
+    - title: Platform modernization
+      detail: >-
+        Led the migration of the legacy engineering system that acts as the brain
+        of the circular cloud operation, replacing SQL-based batch processing with
+        Apache Spark, Kafka streams, a data lake and FastAPI service layers. The
+        V-Next system produces intelligent recommendations in about an hour, down
+        from sixteen.
+    - title: Data orchestration framework
+      detail: >-
+        Built an event-driven framework that automatically creates, updates and
+        deploys data pipelines and their supporting Azure resources — enabling
+        high-scale enterprise ETL and saving roughly 400 hours per developer
+        each year.
+    - title: AI capability building
+      detail: >-
+        Mentored and upskilled 100+ engineers through targeted programs on
+        scalable AI agents and modern agent frameworks, driving organizational
+        readiness for AI-native product development.
+    - title: ML platform for Lean Six Sigma
+      detail: >-
+        Architected the backend and MLOps layer for an in-house Lean Six Sigma
+        product, covering model deployment and OpenAI integration.
+  stack:
+    - Python
+    - Apache Spark
+    - Kafka
+    - Azure
+    - FastAPI
+    - Kubernetes
+    - Agent frameworks
+
+- id: tech9
+  order: 2
+  role: Machine Learning Engineer
+  company: Tech9
+  companyUrl: https://www.tech9.com
+  location: Pune, India
+  period: Dec 2019 — Feb 2022
+  summary: >-
+    Shipped production ML services and cloud-native backends across fintech,
+    SEO and e-commerce clients.
+  highlights:
+    - title: ML models in production
+      detail: >-
+        Built and deployed a transaction-classification service for a fintech
+        product, containerized and served on AWS SageMaker, plus a spam-backlink
+        detection model for an SEO business.
+    - title: Serverless GraphQL API
+      detail: >-
+        Developed a complete serverless GraphQL backend deployed on Google Cloud
+        Functions.
+    - title: Distributed ETL
+      detail: >-
+        Implemented distributed ETL pipelines on Cloud Composer (managed Apache
+        Airflow) and designed the relational schema for an e-commerce platform
+        from the ground up.
+    - title: Delivery engineering
+      detail: >-
+        Designed CI/CD pipelines for reliable deployment to GCP, and built
+        resilient web scrapers for marketplace data collection.
+  stack:
+    - Python
+    - GraphQL
+    - AWS SageMaker
+    - Google Cloud
+    - Airflow
+    - Docker
+
+- id: octathorpe
+  order: 3
+  role: Data Engineer
+  company: Octathorpe Web Consultants
+  location: Hyderabad, India
+  period: Dec 2017 — Nov 2019
+  summary: >-
+    Modernized an analytics stack from spreadsheets to a cloud-native pipeline
+    on Google Cloud.
+  highlights:
+    - title: Google Cloud migration
+      detail: >-
+        Migrated the analytics stack to GCP for reliability and consistency,
+        with tighter BigQuery integration.
+    - title: From Excel to Python
+      detail: >-
+        Moved analytics processes off Excel — first to R, then to Python —
+        automating data extraction and powering visualization dashboards.
+    - title: Event ETL
+      detail: >-
+        Built ETL pipelines to process user event data into relational stores
+        backing the dashboards, along with Python mailers and notifiers that
+        improved data visibility across the organization.
+  stack:
+    - Python
+    - R
+    - BigQuery
+    - Google Cloud
+    - SQL

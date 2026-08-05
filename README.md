@@ -1,44 +1,53 @@
-## Developer Portfolio Landing Page Template
+# anshaj.dev
 
-Use this template if you need a quick developer / data science portfolio! Based on a Minimal Jekyll theme for GitHub Pages.
+Source for [anshaj.dev](https://anshaj.dev) — my personal site.
 
-<img src="images/demo.gif?raw=true"/>
+Built with [Astro](https://astro.build), styled with a warm-parchment editorial
+design system (see `src/styles/tokens.css`), and deployed to GitHub Pages by
+`.github/workflows/deploy.yml` on every push to `master`.
 
-See full step by step tutorial [on Medium](https://medium.com/@evanca/set-up-your-portfolio-website-in-less-than-10-minutes-with-github-pages-d0efa8ff56fd).
-___
+## Local development
 
-You can use the editor on GitHub to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # type-check + static build into dist/
+npm run preview  # serve the built site
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Editing content
 
-___
+Content lives in YAML under `src/data/` and is validated at build time by the
+Zod schemas in `src/content.config.ts`. A typo in a data file fails the build
+rather than silently rendering an empty section.
 
-References:
+| File | Drives |
+| --- | --- |
+| `src/data/site.ts` | Name, role, tagline, intro copy, nav and social links |
+| `src/data/highlights.yml` | The four impact numbers below the hero |
+| `src/data/projects.yml` | The "Selected work" cards (`featured: true` = large card) |
+| `src/data/experience.yml` | The experience timeline |
+| `src/data/teaching.yml` | Teaching and speaking |
+| `src/data/skills.yml` | The toolbox groups |
+| `src/data/certifications.yml` | Home page sample and `/certifications` |
 
-[1] Jekyll theme "Minimal" for GitHub Pages: https://github.com/pages-themes/minimal (CC0 1.0 Universal License)
-<br>[2] Dummy photo via: https://pixabay.com/photos/man-male-adult-person-caucasian-1209494/ (Pixabay License)
-<br>[3] Dummy thumbnail image created by rawpixel.com: https://www.freepik.com/free-vector/set-elements-infographic_2807573.htm (Standard Freepik License)
+To add a project, append an entry to `src/data/projects.yml` with a unique
+`id` and the next `order` value. No component changes needed.
+
+## Design system
+
+Tokens are defined once in `src/styles/tokens.css`. The rules that matter:
+
+- Canvas is Bone Parchment `#f8f8f6` — never pure white for large areas.
+- Headlines are Source Serif 4 at weight 400; Inter carries everything else at
+  400–580. Nothing goes above 580.
+- Clay `#d97757` is the only chromatic color and is decorative only — accent
+  dots and rules, never button fills or link colors.
+- Cards: 24px radius elevated, 16px nested, 8px for buttons and controls.
+- Shadows are a soft `0 4px 20px rgba(0,0,0,.04)` on hover, or absent.
+
+## Deployment
+
+GitHub Pages is configured with **Source: GitHub Actions**. `public/CNAME`
+holds the custom domain, so it is copied into `dist/` on every build — do not
+delete it.

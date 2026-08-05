@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const groups = (await getCollection('skills')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class="section section--nested" id="toolbox">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Toolbox"
+      title="What I reach for"
+      lede="Tools I've shipped production systems with, not just read about."
+    />
+
+    <dl class="toolbox">
+      {
+        groups.map((group) => (
+          <div class="toolbox__group">
+            <dt class="toolbox__label">{group.data.group}</dt>
+            <dd class="toolbox__items">
+              <ul class="badge-row">
+                {group.data.items.map((item) => (
+                  <li class="badge">{item}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .toolbox {
+    display: grid;
+    gap: 0;
+    margin: 0;
+  }
+
+  .toolbox__group {
+    display: grid;
+    gap: var(--spacing-8);
+    padding-block: var(--spacing-24);
+    border-top: 1px solid var(--color-chalk);
+  }
+
+  .toolbox__group:last-child {
+    border-bottom: 1px solid var(--color-chalk);
+  }
+
+  @media (min-width: 48rem) {
+    .toolbox__group {
+      grid-template-columns: 14rem minmax(0, 1fr);
+      gap: var(--spacing-24);
+      align-items: baseline;
+    }
+  }
+
+  .toolbox__label {
+    font-size: var(--text-body);
+    font-weight: var(--weight-550);
+    color: var(--color-carbon-ink);
+  }
+
+  .toolbox__items {
+    margin: 0;
+  }
+</style>

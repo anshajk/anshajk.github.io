@@ -1,0 +1,61 @@
+- id: languages
+  order: 1
+  group: Languages
+  items:
+    - Python
+    - Go
+    - SQL
+    - TypeScript
+    - R
+
+- id: ai-ml
+  order: 2
+  group: AI & machine learning
+  items:
+    - Agentic systems
+    - LLM applications
+    - MCP
+    - RAG
+    - MLOps
+    - Spark ML
+    - scikit-learn
+    - PyTorch
+
+- id: data
+  order: 3
+  group: Data platform
+  items:
+    - Apache Spark
+    - Kafka
+    - Airflow
+    - Data lakes
+    - Streaming ETL
+    - Pipeline orchestration
+
+- id: cloud
+  order: 4
+  group: Cloud & infrastructure
+  items:
+    - Azure
+    - Google Cloud
+    - AWS
+    - Kubernetes
+    - Docker
+    - Serverless
+    - CI/CD
+    - Unix
+    - Git
+
+- id: stores
+  order: 5
+  group: Data stores
+  items:
+    - PostgreSQL
+    - MySQL
+    - SQL Server
+    - MongoDB
+    - BigQuery
+    - Azure Data Explorer
+    - ADLS
+    - HDFS
+    - SQLite

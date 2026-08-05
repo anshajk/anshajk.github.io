@@ -1,0 +1,33 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { site } from '../data/site';
+---
+
+<section class="section" id="about">
+  <div class="container about">
+    <SectionHeader eyebrow="About" title="Notebook to production" />
+
+    <div class="prose about__body">
+      {site.intro.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 56rem) {
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+      gap: var(--spacing-64);
+      align-items: start;
+    }
+
+    .about :global(.section-header) {
+      margin-bottom: 0;
+    }
+  }
+
+  .about__body {
+    font-size: 1.0625rem;
+  }
+</style>
