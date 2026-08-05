@@ -77,8 +77,6 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
   }
 
   .writing__date {
-    grid-column: 1;
-    grid-row: 1;
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
     letter-spacing: 0.02em;
@@ -91,16 +89,28 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
-    grid-column: 1 / -1;
-    grid-row: 2;
   }
 
-  @media (min-width: 48rem) {
-    .writing__date,
-    .writing__body,
+  /*
+   * Below 48rem the row collapses to two lines: date and arrow share the
+   * first, the title and summary span the second. Placement is scoped to the
+   * narrow breakpoint so the desktop grid needs no counter-overrides.
+   */
+  @media (max-width: 47.9375rem) {
+    .writing__date {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
     .writing__arrow {
-      grid-column: auto;
-      grid-row: auto;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+    }
+
+    .writing__body {
+      grid-column: 1 / -1;
+      grid-row: 2;
     }
   }
 
@@ -117,9 +127,6 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
   }
 
   .writing__arrow {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
     font-size: var(--text-body);
     color: var(--color-pebble);
     transition: transform var(--transition), color var(--transition);
