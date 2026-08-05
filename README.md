@@ -52,6 +52,34 @@ Tokens are defined once in `src/styles/tokens.css`. The rules that matter:
 - Cards: 24px radius elevated, 16px nested, 8px for buttons and controls.
 - Shadows are a soft `0 4px 20px rgba(0,0,0,.04)` on hover, or absent.
 
+## Quality checks
+
+```bash
+npm test  # builds are served by `astro preview`, then Playwright drives them
+```
+
+`tests/` holds the guardrails that protect things which are easy to break by
+accident and hard to spot by eye:
+
+- **Contrast** — walks every element that renders its own text, resolves the
+  real background painted behind it and asserts WCAG AA. This catches the case
+  a palette review cannot: a color that passes on parchment but fails on soft
+  stone or on the black footer. `aria-hidden` decoration is exempt.
+- **Overflow** — no element crosses the viewport edge at 390, 768, 1280 or
+  1512px.
+- **Writing row order** — a regression guard for a real bug where a base grid
+  placement overrode its own `min-width` reset and stacked the arrow into the
+  title column on desktop.
+- **Landmarks, alt text and link names**, plus the Open Graph and canonical
+  metadata that link previews depend on.
+
+CI runs on every pull request and again as a gate before deploy. Scheduled
+rebuilds skip the gate on purpose: they exist only to pull a new blog post out
+of the feed, so a flaky check must never be able to stall fresh content.
+
+The weekly link check is intentionally *not* a deploy gate — external sites rot
+and rate-limit on their own schedule. It opens an issue instead.
+
 ## Deployment
 
 GitHub Pages is configured with **Source: GitHub Actions**. `public/CNAME`

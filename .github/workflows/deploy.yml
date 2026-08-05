@@ -19,7 +19,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Pushes are gated on the full quality suite. Scheduled rebuilds skip it:
+  # those runs exist only to pull in a new blog post from the feed, and the
+  # content of master has already passed these checks.
+  quality:
+    if: github.event_name != 'schedule'
+    uses: ./.github/workflows/ci.yml
+
   build:
+    needs: quality
+    if: always() && needs.quality.result != 'failure' && needs.quality.result != 'cancelled'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

@@ -20,6 +20,7 @@ const items = full ? all : all.slice(0, 3);
   <div class="container">
     <SectionHeader
       eyebrow="Certifications"
+      as={full ? 'h1' : 'h2'}
       title={full ? 'Every certification' : 'Verified credentials'}
       lede={
         full
@@ -33,7 +34,11 @@ const items = full ? all : all.slice(0, 3);
         items.map((cert) => (
           <li class="card certs__item">
             <div class="certs__head">
-              <h3 class="certs__name">{cert.data.name}</h3>
+              {full ? (
+                <h2 class="certs__name">{cert.data.name}</h2>
+              ) : (
+                <h3 class="certs__name">{cert.data.name}</h3>
+              )}
               <p class="certs__issuer">{cert.data.issuer}</p>
             </div>
 

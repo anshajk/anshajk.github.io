@@ -1,0 +1,50 @@
+name: Link check
+
+# Deliberately not a deploy gate: external sites rot, rate limit and (in
+# LinkedIn's case) answer bots with HTTP 999, none of which should be able to
+# stop a deploy. This just opens an issue when something actually breaks.
+on:
+  schedule:
+    - cron: '40 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Check links in the built site
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --accept 200,206,999
+            --exclude '^mailto:'
+            --exclude 'linkedin\.com'
+            dist/**/*.html
+          fail: false
+
+      - name: Open an issue if links are broken
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Broken links found on anshaj.dev
+          content-filepath: ./lychee/out.md
+          labels: broken-links

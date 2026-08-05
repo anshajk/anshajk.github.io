@@ -4,14 +4,25 @@ interface Props {
   title: string;
   lede?: string;
   id?: string;
+  as?: 'h1' | 'h2';
 }
 
-const { eyebrow, title, lede, id } = Astro.props;
+const { eyebrow, title, lede, id, as = 'h2' } = Astro.props;
 ---
 
 <header class="section-header">
   <p class="eyebrow">{eyebrow}</p>
-  <h2 class="serif section-header__title" id={id}>{title}</h2>
+  {
+    as === 'h1' ? (
+      <h1 class="serif section-header__title" id={id}>
+        {title}
+      </h1>
+    ) : (
+      <h2 class="serif section-header__title" id={id}>
+        {title}
+      </h2>
+    )
+  }
   {lede && <p class="section-header__lede">{lede}</p>}
 </header>
 
