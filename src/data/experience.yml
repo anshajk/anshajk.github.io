@@ -3,7 +3,7 @@
   role: Machine Learning Engineer II
   company: Microsoft
   companyUrl: https://www.microsoft.com/
-  location: Bengaluru, India
+  location: India
   period: Feb 2022 — Present
   current: true
   summary: >-
@@ -51,7 +51,7 @@
   role: Machine Learning Engineer
   company: Tech9
   companyUrl: https://www.tech9.com
-  location: Pune, India
+  location: India
   period: Dec 2019 — Feb 2022
   summary: >-
     Shipped production ML services and cloud-native backends across fintech,
@@ -87,7 +87,7 @@
   order: 3
   role: Data Engineer
   company: Octathorpe Web Consultants
-  location: Hyderabad, India
+  location: India
   period: Dec 2017 — Nov 2019
   summary: >-
     Modernized an analytics stack from spreadsheets to a cloud-native pipeline
