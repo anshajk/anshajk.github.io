@@ -26,6 +26,7 @@ export const socials = [
 export const nav = [
   { label: 'Work', href: '/#work' },
   { label: 'Experience', href: '/#experience' },
+  { label: 'Awards', href: '/#recognition' },
   { label: 'Teaching', href: '/#teaching' },
   { label: 'Toolbox', href: '/#toolbox' },
   { label: 'Certifications', href: '/certifications/' },

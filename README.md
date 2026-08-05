@@ -27,6 +27,7 @@ rather than silently rendering an empty section.
 | `src/data/highlights.yml` | The four impact numbers below the hero |
 | `src/data/projects.yml` | The "Selected work" cards (`featured: true` = large card) |
 | `src/data/experience.yml` | The experience timeline |
+| `src/data/awards.yml` | The "Recognition" section (award artwork lives in `src/assets/awards/`) |
 | `src/data/teaching.yml` | Teaching and speaking |
 | `src/data/skills.yml` | The toolbox groups |
 | `src/data/certifications.yml` | Home page sample and `/certifications` |

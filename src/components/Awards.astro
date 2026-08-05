@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+
+const entries = (await getCollection('awards')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class="section" id="recognition">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Recognition"
+      title="Named for the work, not the title"
+      lede="Two awards I'm proud of — one for putting AI agents into production, one for teaching."
+    />
+
+    <ul class="awards">
+      {
+        entries.map((entry) => (
+          <li class="card awards__item">
+            <a
+              class="awards__frame"
+              href={entry.data.image.src}
+              target="_blank"
+              rel="noopener"
+            >
+              <Image
+                src={entry.data.image}
+                alt={entry.data.imageAlt}
+                widths={[420, 840, 1260]}
+                sizes="(min-width: 56rem) 45vw, 90vw"
+                loading="lazy"
+              />
+              <span class="awards__zoom" aria-hidden="true">
+                View full size ↗
+              </span>
+            </a>
+
+            <div class="awards__body">
+              <p class="awards__meta">
+                {entry.data.issuer} · {entry.data.period}
+              </p>
+              <h3 class="serif awards__name">{entry.data.name}</h3>
+              {entry.data.track && (
+                <p class="awards__track">{entry.data.track}</p>
+              )}
+              <blockquote class="awards__citation">
+                {entry.data.citation}
+              </blockquote>
+              {entry.data.detail && (
+                <p class="awards__detail">{entry.data.detail}</p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .awards {
+    display: grid;
+    gap: var(--spacing-24);
+    list-style: none;
+  }
+
+  @media (min-width: 56rem) {
+    .awards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .awards__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-24);
+  }
+
+  .awards__frame {
+    position: relative;
+    display: block;
+    padding: var(--spacing-8);
+    border: 1px solid var(--color-chalk);
+    border-radius: var(--radius-cards);
+    background-color: var(--color-soft-stone);
+    overflow: hidden;
+  }
+
+  .awards__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    border-radius: calc(var(--radius-cards) - 6px);
+  }
+
+  .awards__zoom {
+    position: absolute;
+    right: var(--spacing-16);
+    bottom: var(--spacing-16);
+    padding: 0.375rem 0.625rem;
+    border-radius: var(--radius-buttons);
+    background-color: var(--color-paper-white);
+    color: var(--color-graphite);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 150ms ease,
+      transform 150ms ease;
+  }
+
+  .awards__frame:hover .awards__zoom,
+  .awards__frame:focus-visible .awards__zoom {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (hover: none) {
+    .awards__zoom {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .awards__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .awards__meta {
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-ashen);
+  }
+
+  .awards__name {
+    font-size: 1.25rem;
+    line-height: var(--leading-heading-sm);
+    color: var(--color-carbon-ink);
+  }
+
+  .awards__track {
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-graphite);
+  }
+
+  .awards__citation {
+    margin-top: var(--spacing-8);
+    padding-left: var(--spacing-16);
+    border-left: 2px solid var(--color-clay);
+    font-size: var(--text-body);
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--color-graphite);
+  }
+
+  .awards__detail {
+    font-size: var(--text-body);
+    line-height: 1.65;
+    color: var(--color-ashen);
+  }
+</style>

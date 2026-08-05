@@ -1,0 +1,32 @@
+- id: stellar-quest-ai-agents
+  order: 1
+  name: Cloud Supply Chain Stellar Quest Award
+  track: AI Agents
+  issuer: Microsoft
+  period: "2025"
+  citation: >-
+    Celebrating those who propel our Cloud Supply Chain into the AI-driven
+    future by development of AI agents.
+  detail: >-
+    Presented by the Corporate Vice President for Cloud Supply Chain, for
+    designing and shipping agentic systems that went into production use.
+  image: ../assets/awards/stellar-quest-award.jpg
+  imageAlt: >-
+    Microsoft Cloud Supply Chain Stellar Quest Award certificate for AI Agents,
+    awarded to Anshaj Khare.
+
+- id: all-rounder-instructor
+  order: 2
+  name: All Rounder Instructor
+  issuer: Interview Kickstart
+  period: "2025"
+  citation: >-
+    For his outstanding contributions in teaching, mentoring, and guiding
+    learners with excellence, dedication, and impact.
+  detail: >-
+    Awarded by the founders for teaching across the full curriculum, from Python
+    fundamentals through applied machine learning.
+  image: ../assets/awards/all-rounder-instructor.jpg
+  imageAlt: >-
+    Interview Kickstart All Rounder Instructor certificate awarded to Anshaj
+    Khare.

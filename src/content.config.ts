@@ -54,6 +54,22 @@ const certifications = defineCollection({
   }),
 });
 
+const awards = defineCollection({
+  loader: file('src/data/awards.yml'),
+  schema: ({ image }) =>
+    z.object({
+      order: z.number(),
+      name: z.string(),
+      track: z.string().optional(),
+      issuer: z.string(),
+      period: z.string(),
+      citation: z.string(),
+      detail: z.string().optional(),
+      image: image(),
+      imageAlt: z.string(),
+    }),
+});
+
 const skills = defineCollection({
   loader: file('src/data/skills.yml'),
   schema: z.object({
@@ -88,6 +104,7 @@ const highlights = defineCollection({
 export const collections = {
   experience,
   projects,
+  awards,
   certifications,
   skills,
   teaching,
