@@ -5,6 +5,7 @@ export const site = {
   company: 'Microsoft',
   companyUrl: 'https://www.microsoft.com/',
   url: 'https://anshaj.dev',
+  email: 'contact@anshaj.dev',
   tagline:
     'I build agentic AI systems and the large-scale data platforms they run on.',
   description:
@@ -17,6 +18,7 @@ export const site = {
 } as const;
 
 export const socials = [
+  { label: 'Email', href: 'mailto:contact@anshaj.dev' },
   { label: 'GitHub', href: 'https://github.com/anshajk' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/anshaj-khare/' },
   { label: 'The Compute Blog', href: 'https://compute.anshaj.dev' },

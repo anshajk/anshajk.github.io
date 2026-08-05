@@ -12,6 +12,9 @@ const year = new Date().getFullYear();
         My inbox is open for interesting problems — agentic systems, data
         platforms, or teaching engineers to build both.
       </p>
+      <a class="site-footer__email" href={`mailto:${site.email}`}>
+        {site.email}
+      </a>
     </div>
 
     <nav class="site-footer__nav" aria-label="Elsewhere">
@@ -72,12 +75,29 @@ const year = new Date().getFullYear();
     color: var(--color-pebble);
   }
 
+  .site-footer__email {
+    display: inline-block;
+    margin-top: var(--spacing-16);
+    font-size: var(--text-body-lg);
+    font-weight: var(--weight-medium);
+    color: var(--color-bone-parchment);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: #4a4a48;
+    transition: text-decoration-color var(--transition);
+  }
+
+  .site-footer__email:hover {
+    text-decoration-color: var(--color-bone-parchment);
+  }
+
   .site-footer__heading {
     font-size: var(--text-caption);
     font-weight: var(--weight-medium);
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: #6b6963;
+    /* Lightened from #6b6963, which was only 3.83:1 on the black footer. */
+    color: #78766f;
   }
 
   .site-footer__list {
@@ -102,7 +122,7 @@ const year = new Date().getFullYear();
   .site-footer__copyright {
     margin-top: var(--spacing-24);
     font-size: var(--text-small);
-    color: #6b6963;
+    color: #78766f;
   }
 
   .site-footer :global(:focus-visible) {

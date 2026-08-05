@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
+  # The Writing section is built from the Compute Blog RSS feed, so the site
+  # has to rebuild on its own for a new post to appear. 05:20 UTC is ~10:50 IST.
+  schedule:
+    - cron: '20 5 * * *'
   workflow_dispatch:
 
 permissions:

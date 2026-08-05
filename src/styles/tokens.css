@@ -9,7 +9,11 @@
   --color-soft-stone: #efeeeb;
   --color-carbon-ink: #121212;
   --color-graphite: #373734;
-  --color-ashen: #7b7974;
+  /* Darkened from the spec's #7b7974: it carries real body copy in 17 places
+     and only reached 3.75:1 on soft stone. This clears WCAG AA at 4.65:1. */
+  --color-ashen: #6c6a66;
+  /* Pebble and mist stay as specified — pebble is only used on the black
+     footer (7.45:1) and mist only draws borders and underlines. */
   --color-pebble: #9c9a92;
   --color-mist: #b7b7b5;
   --color-chalk: #e7e6e1;
