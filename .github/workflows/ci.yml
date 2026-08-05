@@ -29,6 +29,10 @@ jobs:
       # components and validates every content collection against its schema.
       - name: Type check and build
         run: npm run build
+        env:
+          # Star counts come from the GitHub API at build time; shared runner
+          # IPs hit the 60/hour anonymous limit, so authenticate.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium

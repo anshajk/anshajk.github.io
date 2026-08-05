@@ -40,6 +40,18 @@ latest posts from the Compute Blog RSS feed at build time, so publishing a post
 and re-running the deploy is enough to update the site. If the feed is
 unreachable the build logs a warning and omits the section rather than failing.
 
+Star counts on the open-source cards are fetched the same way, by
+`src/lib/github.ts`, and refresh on the daily rebuild. Counts below three are
+hidden on purpose — a "1 star" badge reads weaker than no badge at all — and a
+rate-limited or failed request simply drops the badge instead of breaking the
+build. CI passes `GITHUB_TOKEN` because shared runner IPs burn through the
+anonymous 60-requests-per-hour limit.
+
+Structured data is generated from the same collections: the JSON-LD `Person`
+block in `src/layouts/Base.astro` builds `award` and `hasCredential` from
+`awards.yml` and `certifications.yml`, so adding a credential updates the SEO
+markup with no extra step.
+
 ## Design system
 
 Tokens are defined once in `src/styles/tokens.css`. The rules that matter:

@@ -27,6 +27,8 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check links in the built site
         id: lychee

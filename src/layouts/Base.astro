@@ -5,6 +5,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { getCollection } from 'astro:content';
 
 interface Props {
   title?: string;
@@ -22,14 +23,35 @@ const documentTitle = pageTitle
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
 const ogImage = new URL('/og.png', Astro.site ?? site.url);
 
+// Awards and certifications are described in the structured data too, so search
+// engines see the credentials rather than only the prose. Both are read from
+// the collections rather than restated here, so the schema cannot drift.
+const awards = (await getCollection('awards')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const certifications = (await getCollection('certifications')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: site.name,
   url: site.url,
   jobTitle: site.role,
+  email: `mailto:${site.email}`,
   worksFor: { '@type': 'Organization', name: site.company },
   description: site.description,
+  award: awards.map(
+    (entry) => `${entry.data.name} — ${entry.data.issuer}, ${entry.data.period}`
+  ),
+  hasCredential: certifications.map((cert) => ({
+    '@type': 'EducationalOccupationalCredential',
+    name: cert.data.name,
+    credentialCategory: 'certificate',
+    recognizedBy: { '@type': 'Organization', name: cert.data.issuer },
+    ...(cert.data.href ? { url: cert.data.href } : {}),
+  })),
   sameAs: [
     'https://github.com/anshajk',
     'https://www.linkedin.com/in/anshaj-khare/',

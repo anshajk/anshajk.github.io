@@ -1,10 +1,27 @@
 ---
 import { getCollection } from 'astro:content';
 import SectionHeader from './SectionHeader.astro';
+import { getStarCounts, repoFromUrl } from '../lib/github';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order
 );
+
+const repoFor = new Map<string, string>();
+for (const project of projects) {
+  for (const item of project.data.links) {
+    const repo = repoFromUrl(item.href);
+    if (repo && !repoFor.has(project.id)) repoFor.set(project.id, repo);
+  }
+}
+
+const stars = await getStarCounts([...repoFor.values()]);
+
+/** Star count for a project, or null when it has none worth showing. */
+const starsFor = (id: string) => {
+  const repo = repoFor.get(id);
+  return repo ? (stars.get(repo) ?? null) : null;
+};
 
 const featured = projects.filter((p) => p.data.featured);
 const rest = projects.filter((p) => !p.data.featured);
@@ -52,7 +69,15 @@ const rest = projects.filter((p) => !p.data.featured);
       {
         rest.map((project) => (
           <li class="card card--nested work__card">
-            <span class="badge">{project.data.kind}</span>
+            <div class="work__meta">
+              <span class="badge">{project.data.kind}</span>
+              {starsFor(project.id) && (
+                <span class="work__stars">
+                  <span aria-hidden="true">★</span>
+                  {starsFor(project.id)} stars on GitHub
+                </span>
+              )}
+            </div>
             <h3 class="serif work__name work__name--sm">{project.data.name}</h3>
             <p class="work__description">{project.data.description}</p>
             <ul class="badge-row work__stack">
@@ -139,6 +164,15 @@ const rest = projects.filter((p) => !p.data.featured);
     block-size: 5px;
     border-radius: var(--radius-pill);
     background-color: var(--color-clay);
+  }
+
+  .work__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: var(--text-small);
+    color: var(--color-ashen);
+    white-space: nowrap;
   }
 
   .work__name {
