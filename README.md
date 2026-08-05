@@ -35,6 +35,11 @@ rather than silently rendering an empty section.
 To add a project, append an entry to `src/data/projects.yml` with a unique
 `id` and the next `order` value. No component changes needed.
 
+The "Writing" section is not stored in this repo — `src/lib/feed.ts` reads the
+latest posts from the Compute Blog RSS feed at build time, so publishing a post
+and re-running the deploy is enough to update the site. If the feed is
+unreachable the build logs a warning and omits the section rather than failing.
+
 ## Design system
 
 Tokens are defined once in `src/styles/tokens.css`. The rules that matter:
