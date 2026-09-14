@@ -16,6 +16,11 @@ const experience = defineCollection({
     companyUrl: z.url().optional(),
     location: z.string(),
     period: z.string(),
+    promotion: z.object({
+      from: z.string(),
+      to: z.string(),
+      period: z.string(),
+    }).optional(),
     current: z.boolean().default(false),
     summary: z.string(),
     highlights: z.array(
@@ -101,6 +106,17 @@ const highlights = defineCollection({
   }),
 });
 
+const writing = defineCollection({
+  loader: file('src/data/writing.yml'),
+  schema: z.object({
+    order: z.number().int().positive(),
+    title: z.string().min(1),
+    href: z.url(),
+    topic: z.string().min(1),
+    summary: z.string().min(1),
+  }),
+});
+
 export const collections = {
   experience,
   projects,
@@ -109,4 +125,5 @@ export const collections = {
   skills,
   teaching,
   highlights,
+  writing,
 };

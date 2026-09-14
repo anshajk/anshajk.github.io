@@ -11,3 +11,11 @@ dist/
 # Playwright
 test-results/
 playwright-report/
+
+# Private local resume and build artifacts (never publish through public/).
+/resume.tex
+/resume.pdf
+/resume.aux
+/resume.out
+/resume.synctex.gz
+/.resume-build/

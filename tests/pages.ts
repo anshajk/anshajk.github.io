@@ -1,2 +1,2 @@
 /** Every route the suite exercises. Add new pages here. */
-export const PAGES = ['/', '/certifications/'] as const;
+export const PAGES = ['/', '/writing/', '/certifications/'] as const;

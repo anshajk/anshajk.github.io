@@ -1,10 +1,8 @@
-const API = 'https://api.github.com/repos';
-
-/**
- * Repos with only a star or two read as weaker than saying nothing at all, so
- * a count is only worth surfacing once it represents real interest.
- */
-const MIN_STARS = 3;
+import {
+  parseRepositoryStats,
+  repositoryApiUrl,
+  type RepositoryStats,
+} from './repository-stats';
 
 /** Pulls `owner/repo` out of any GitHub URL, ignoring everything else. */
 export function repoFromUrl(url: string): string | null {
@@ -15,17 +13,13 @@ export function repoFromUrl(url: string): string | null {
 }
 
 /**
- * Reads star counts at build time. The daily scheduled rebuild keeps them
- * current without any client-side request.
- *
- * Fails soft on purpose: unauthenticated GitHub allows 60 requests an hour per
- * IP and CI runners share addresses, so a rate limit or an outage must degrade
- * to "no star counts" rather than break the build.
+ * Build-time counts remain available without JavaScript or if a live refresh
+ * fails. Authentication stays in this server-only module, never the browser.
  */
-export async function getStarCounts(
+export async function getRepositoryStats(
   repos: string[]
-): Promise<Map<string, number>> {
-  const counts = new Map<string, number>();
+): Promise<Map<string, RepositoryStats>> {
+  const counts = new Map<string, RepositoryStats>();
   const token = process.env.GITHUB_TOKEN;
 
   const headers: Record<string, string> = {
@@ -37,17 +31,21 @@ export async function getStarCounts(
   await Promise.all(
     [...new Set(repos)].map(async (repo) => {
       try {
-        const response = await fetch(`${API}/${repo}`, {
+        const response = await fetch(repositoryApiUrl(repo), {
           headers,
           signal: AbortSignal.timeout(10_000),
         });
-        if (!response.ok) return;
+        if (!response.ok) {
+          throw new Error(`GitHub API responded ${response.status}`);
+        }
 
-        const data = (await response.json()) as { stargazers_count?: number };
-        const stars = data.stargazers_count ?? 0;
-        if (stars >= MIN_STARS) counts.set(repo, stars);
-      } catch {
-        // Leave the repo out; the card simply renders without a count.
+        const data: unknown = await response.json();
+        counts.set(repo, parseRepositoryStats(data));
+      } catch (error) {
+        console.warn(
+          `[github] could not load counts for ${repo}:`,
+          error instanceof Error ? error.message : error
+        );
       }
     })
   );

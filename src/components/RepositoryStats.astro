@@ -1,0 +1,75 @@
+---
+import {
+  formatRepositoryCount,
+  MIN_STARS,
+  type RepositoryStats,
+} from '../lib/repository-stats';
+
+interface Props {
+  repo: string;
+  stats?: RepositoryStats;
+}
+
+const { repo, stats } = Astro.props;
+---
+
+<div
+  class="repo-stats"
+  role="group"
+  aria-label={`GitHub statistics for ${repo}`}
+  data-github-repo={repo}
+  data-github-source={stats ? 'build' : 'unavailable'}
+  data-stars={stats?.stars}
+  data-forks={stats?.forks}
+  hidden={!stats || (stats.stars < MIN_STARS && stats.forks === 0)}
+>
+  <a
+    class="repo-stats__link"
+    data-repo-stars
+    href={`https://github.com/${repo}/stargazers`}
+    rel="noopener"
+    hidden={!stats || stats.stars < MIN_STARS}
+  >
+    {stats ? formatRepositoryCount(stats.stars, 'star') : 'Stars'}
+  </a>
+  <a
+    class="repo-stats__link"
+    data-repo-forks
+    href={`https://github.com/${repo}/forks`}
+    rel="noopener"
+    hidden={!stats || stats.forks === 0}
+  >
+    {stats ? formatRepositoryCount(stats.forks, 'fork') : 'Forks'}
+  </a>
+</div>
+
+<script>
+  import { initRepositoryStats } from '../scripts/repository-stats';
+  initRepositoryStats();
+</script>
+
+<style>
+  .repo-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-8);
+    font-size: var(--text-small);
+    color: var(--color-ashen);
+  }
+
+  .repo-stats__link {
+    color: inherit;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .repo-stats__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .repo-stats[hidden],
+  .repo-stats__link[hidden] {
+    display: none;
+  }
+</style>

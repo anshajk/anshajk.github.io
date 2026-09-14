@@ -8,7 +8,9 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "playwright test"
+    "test": "playwright test",
+    "resume:build": "node scripts/build-resume.mjs",
+    "resume:test": "node --test scripts/build-resume.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

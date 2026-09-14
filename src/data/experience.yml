@@ -6,15 +6,35 @@
   location: India
   period: Feb 2022 — Present
   current: true
+  promotion:
+    from: L61
+    to: L62
+    period: Feb 2024
   summary: >-
-    Building agentic AI systems and the modern data platform behind Microsoft
-    Cloud Supply Chain's circular cloud operations.
+    Building production AI agents and cloud data platforms for Microsoft Cloud
+    Supply Chain, with end-to-end ownership spanning tool integration, retrieval,
+    evaluations, and deployment.
   highlights:
-    - title: Agentic AI systems
+    - title: MCP-enabled planning agents
       detail: >-
-        Designed, built and deployed multiple production agentic systems — both
-        user-facing and service-to-service. Received the org-level CSCP Stellar
-        Quest award for driving this end to end.
+        Built production conversational agents that connect Model Context
+        Protocol tools to Azure Data Explorer, helping teams explore operational
+        data through natural-language questions.
+    - title: Agentic RAG and human review
+      detail: >-
+        Developed retrieval-augmented agent workflows backed by vector databases
+        to support operational decisions, combining automated outcomes with
+        escalation to human review.
+    - title: Multi-agent risk monitoring
+      detail: >-
+        Built production workflows with Microsoft Agent Framework to research
+        external events, compare findings with tracked information, update
+        retrieval stores, and surface operational risks or mitigations.
+    - title: Evaluations and guardrails
+      detail: >-
+        Used Azure OpenAI and internal AI tooling for agent evaluations,
+        safety guardrails, and production-readiness checks across deployed
+        systems.
     - title: Platform modernization
       detail: >-
         Led the migration of the legacy engineering system that acts as the brain
@@ -31,8 +51,8 @@
     - title: AI capability building
       detail: >-
         Mentored and upskilled 100+ engineers through targeted programs on
-        scalable AI agents and modern agent frameworks, driving organizational
-        readiness for AI-native product development.
+        scalable AI agents and modern agent frameworks. Received the org-level
+        CSCP Stellar Quest award for end-to-end delivery of agentic systems.
     - title: ML platform for Lean Six Sigma
       detail: >-
         Architected the backend and MLOps layer for an in-house Lean Six Sigma
@@ -42,9 +62,14 @@
     - Apache Spark
     - Kafka
     - Azure
+    - Azure OpenAI
+    - Azure Data Explorer
+    - Microsoft Agent Framework
+    - MCP
+    - Agentic RAG
+    - Agent evaluations
     - FastAPI
     - Kubernetes
-    - Agent frameworks
 
 - id: tech9
   order: 2

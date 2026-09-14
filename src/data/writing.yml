@@ -1,0 +1,51 @@
+# Start here: keep stable IDs and unique order values to set the reading sequence.
+# Verify titles and summaries against the linked public posts when updating.
+- id: what-are-agents
+  order: 1
+  title: What are AI agents?
+  href: https://compute.anshaj.dev/p/what-are-ai-agents-really
+  topic: Fundamentals · Basics
+  summary: >-
+    What really makes an AI agent?
+- id: what-is-mcp
+  order: 2
+  title: What is MCP
+  href: https://compute.anshaj.dev/p/what-is-mcp
+  topic: Tooling · Model Context Protocol
+  summary: >-
+    Start with how agents connect to tools and data: MCP hosts, clients,
+    servers, and the capabilities they exchange.
+- id: rag
+  order: 3
+  title: Retrieval Augment Generation
+  href: https://compute.anshaj.dev/p/retrieval-augmented-generation
+  topic: Retrieval · RAG architecture
+  summary: >-
+    What is a RAG system and how does it work?
+
+- id: rag-architects-handbook
+  order: 4
+  title: RAG Architect’s Handbook
+  href: https://compute.anshaj.dev/p/rag-architects-handbook
+  topic: Retrieval · RAG architecture
+  summary: >-
+    Move beyond a basic retrieval pipeline with query transformation,
+    reranking, GraphRAG, and adaptive patterns—and the trade-offs behind them.
+
+- id: evaluating-agentic-systems
+  order: 5
+  title: Evaluating Agentic Systems
+  href: https://compute.anshaj.dev/p/evaluating-agentic-systems
+  topic: Evaluation · Agent reliability
+  summary: >-
+    Check whether an agent actually works by evaluating its tool calls and
+    final answers, using golden datasets and a practical DeepEval example.
+
+- id: multi-agent-systems
+  order: 6
+  title: Multi-Agent Systems
+  href: https://compute.anshaj.dev/p/multi-agent-systems
+  topic: Orchestration · Multi-agent systems
+  summary: >-
+    Decide when multiple agents are worth the coordination cost, then explore
+    orchestration patterns with Microsoft Agent Framework and Google ADK.

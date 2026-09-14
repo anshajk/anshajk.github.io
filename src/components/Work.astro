@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import SectionHeader from './SectionHeader.astro';
-import { getStarCounts, repoFromUrl } from '../lib/github';
+import RepositoryStats from './RepositoryStats.astro';
+import { getRepositoryStats, repoFromUrl } from '../lib/github';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order
@@ -15,16 +16,14 @@ for (const project of projects) {
   }
 }
 
-const stars = await getStarCounts([...repoFor.values()]);
+const statistics = await getRepositoryStats([...repoFor.values()]);
 
-/** Star count for a project, or null when it has none worth showing. */
-const starsFor = (id: string) => {
-  const repo = repoFor.get(id);
-  return repo ? (stars.get(repo) ?? null) : null;
-};
-
-const featured = projects.filter((p) => p.data.featured);
-const rest = projects.filter((p) => !p.data.featured);
+const cards = projects.map((project) => ({
+  project,
+  repo: repoFor.get(project.id),
+}));
+const featured = cards.filter(({ project }) => project.data.featured);
+const rest = cards.filter(({ project }) => !project.data.featured);
 ---
 
 <section class="section" id="work">
@@ -37,12 +36,18 @@ const rest = projects.filter((p) => !p.data.featured);
 
     <ul class="work__featured">
       {
-        featured.map((project) => (
+        featured.map(({ project, repo }) => (
           <li class="card work__card work__card--featured">
             <div class="work__meta">
               <span class="badge">{project.data.kind}</span>
               {project.data.status && (
                 <span class="work__status">{project.data.status}</span>
+              )}
+              {repo && (
+                <RepositoryStats
+                  repo={repo}
+                  stats={statistics.get(repo)}
+                />
               )}
             </div>
             <h3 class="serif work__name">{project.data.name}</h3>
@@ -67,15 +72,15 @@ const rest = projects.filter((p) => !p.data.featured);
 
     <ul class="work__grid">
       {
-        rest.map((project) => (
+        rest.map(({ project, repo }) => (
           <li class="card card--nested work__card">
             <div class="work__meta">
               <span class="badge">{project.data.kind}</span>
-              {starsFor(project.id) && (
-                <span class="work__stars">
-                  <span aria-hidden="true">★</span>
-                  {starsFor(project.id)} stars on GitHub
-                </span>
+              {repo && (
+                <RepositoryStats
+                  repo={repo}
+                  stats={statistics.get(repo)}
+                />
               )}
             </div>
             <h3 class="serif work__name work__name--sm">{project.data.name}</h3>
@@ -146,6 +151,7 @@ const rest = projects.filter((p) => !p.data.featured);
 
   .work__meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--spacing-8);
   }
@@ -164,15 +170,6 @@ const rest = projects.filter((p) => !p.data.featured);
     block-size: 5px;
     border-radius: var(--radius-pill);
     background-color: var(--color-clay);
-  }
-
-  .work__stars {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: var(--text-small);
-    color: var(--color-ashen);
-    white-space: nowrap;
   }
 
   .work__name {

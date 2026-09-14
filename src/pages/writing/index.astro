@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Writing from '../../components/Writing.astro';
+
+const startHere = (await getCollection('writing')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base
+  pageTitle="Writing"
+  description="A curated learning path through AI tooling, retrieval, evaluation, and multi-agent systems, plus recent posts from Anshaj Khare’s Compute Blog."
+>
+  <section class="section" aria-labelledby="writing-title">
+    <div class="container">
+      <SectionHeader
+        eyebrow="The Compute Blog"
+        as="h1"
+        id="writing-title"
+        title="Writing"
+        lede="I write about how modern AI systems actually work: the tools they use, the knowledge they retrieve, and the engineering that makes them reliable. Start with the reading path below, or catch up on recent posts."
+      />
+      <p class="prose">
+        Full articles live on{' '}
+        <a href="https://compute.anshaj.dev" rel="noopener">The Compute Blog</a>.
+        This page is a guide to where to begin.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--nested" id="start-here" aria-labelledby="start-here-title">
+    <div class="container">
+      <SectionHeader
+        eyebrow="A curated learning path"
+        id="start-here-title"
+        title="Start here"
+        lede="Read in order: connect an agent to tools, give it useful context, evaluate its behavior, then decide when to bring in more agents."
+      />
+
+      <ol class="learning-path">
+        {
+          startHere.map(({ data: post }) => (
+            <li class="learning-path__item">
+              <p class="learning-path__topic">{post.topic}</p>
+              <h3 class="serif learning-path__title">
+                <a href={post.href} rel="noopener">
+                  {post.title}
+                  <span aria-hidden="true"> ↗</span>
+                </a>
+              </h3>
+              <p class="learning-path__summary">{post.summary}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <Writing full />
+</Base>
+
+<style>
+  .learning-path {
+    padding-inline-start: var(--spacing-32);
+    max-width: 52rem;
+  }
+
+  .learning-path__item {
+    padding-block: var(--spacing-24);
+    padding-inline-start: var(--spacing-8);
+    border-bottom: 1px solid var(--color-mist);
+  }
+
+  .learning-path__item::marker {
+    font-family: var(--font-serif);
+    font-size: var(--text-heading-sm);
+    color: var(--color-ashen);
+  }
+
+  .learning-path__topic {
+    margin-bottom: var(--spacing-8);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--color-ashen);
+  }
+
+  .learning-path__title {
+    font-size: var(--text-heading-sm);
+    line-height: var(--leading-heading-sm);
+  }
+
+  .learning-path__summary {
+    margin-top: var(--spacing-8);
+    max-width: var(--measure);
+    font-size: var(--text-body-lg);
+    color: var(--color-graphite);
+  }
+</style>

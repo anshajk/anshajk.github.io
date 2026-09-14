@@ -13,9 +13,16 @@
   group: AI & machine learning
   items:
     - Agentic systems
+    - Multi-agent orchestration
     - LLM applications
+    - Azure OpenAI
+    - Microsoft Agent Framework
     - MCP
     - RAG
+    - Agentic RAG
+    - Agent evaluations
+    - Safety guardrails
+    - Human-in-the-loop workflows
     - MLOps
     - Spark ML
     - scikit-learn
@@ -50,6 +57,7 @@
   order: 5
   group: Data stores
   items:
+    - Vector databases
     - PostgreSQL
     - MySQL
     - SQL Server

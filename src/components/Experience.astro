@@ -38,6 +38,16 @@ const roles = (await getCollection('experience')).sort(
                   role.data.company
                 )}
               </p>
+              {role.data.promotion && (
+                <p class="timeline__promotion">
+                  <span>
+                    Promoted from {role.data.promotion.from} to {role.data.promotion.to}
+                  </span>
+                  <span class="timeline__promotion-period">
+                    {role.data.promotion.period}
+                  </span>
+                </p>
+              )}
               <p class="timeline__summary">{role.data.summary}</p>
 
               <ul class="timeline__highlights">
@@ -140,6 +150,20 @@ const roles = (await getCollection('experience')).sort(
     margin-top: var(--spacing-8);
     font-size: var(--text-body);
     color: var(--color-ashen);
+  }
+
+  .timeline__promotion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-8) var(--spacing-16);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--color-graphite);
+  }
+
+  .timeline__promotion-period {
+    color: var(--color-ashen);
+    font-weight: var(--weight-regular);
   }
 
   .timeline__highlights {

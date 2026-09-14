@@ -22,8 +22,8 @@ const stripHtml = (value: string) =>
 
 /**
  * Reads the latest Compute Blog posts at build time. A feed outage must not
- * break the deploy, so failures resolve to an empty list and the section is
- * simply omitted.
+ * break the deploy, so failures resolve to an empty list. Callers keep their
+ * curated content and direct blog links visible when recent posts are missing.
  */
 export async function getLatestPosts(limit = 4): Promise<Post[]> {
   try {
@@ -56,7 +56,7 @@ export async function getLatestPosts(limit = 4): Promise<Post[]> {
       .slice(0, limit);
   } catch (error) {
     console.warn(
-      `[writing] could not load ${FEED_URL}, omitting the section:`,
+      `[writing] could not load ${FEED_URL}; showing writing fallback:`,
       error instanceof Error ? error.message : error
     );
     return [];
